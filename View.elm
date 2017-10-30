@@ -1,8 +1,8 @@
 module View exposing (view)
 
-import Html exposing (div, text, button)
+import Html
 import Html.Attributes
-import Html.Events exposing (onClick)
+import Html.Events
 import Pizza
 import Types exposing (Model, Msg(..))
 
