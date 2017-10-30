@@ -40,6 +40,11 @@ addToppingButton : Pizza.Pizza -> Pizza.Topping -> Html.Html Msg
 addToppingButton pizza topping =
     Html.button
         [ Html.Events.onClick (Types.AddTopping topping)
-        , Html.Attributes.disabled (Pizza.countTopping topping pizza == 2)
+        , Html.Attributes.disabled (toppingIsAvailable pizza topping)
         ]
         [ Html.text ("Add " ++ topping) ]
+
+
+toppingIsAvailable : Pizza.Pizza -> Pizza.Topping -> Bool
+toppingIsAvailable pizza topping =
+    Pizza.countTopping topping pizza >= 2 || Pizza.countAllToppings pizza >= 10

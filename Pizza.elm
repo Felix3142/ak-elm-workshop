@@ -6,6 +6,7 @@ module Pizza
         , addTopping
         , bases
         , toppings
+        , countAllToppings
         , countTopping
         )
 
@@ -34,6 +35,11 @@ countTopping topping pizza =
     List.length (List.filter ((==) topping) pizza.toppings)
 
 
+countAllToppings : Pizza -> Int
+countAllToppings pizza =
+    List.length pizza.toppings
+
+
 bases : List Base
 bases =
     [ "Margherita", "Bianco" ]
@@ -41,4 +47,4 @@ bases =
 
 toppings : List Topping
 toppings =
-    [ "Pineapple", "Spam" ]
+    [ "Pineapple", "Spam", "Honey", "Walnuts", "Cherries", "Feta" ]
