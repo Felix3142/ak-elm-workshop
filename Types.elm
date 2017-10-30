@@ -1,24 +1,12 @@
 module Types exposing (..)
 
-
-type alias Base =
-    String
-
-
-type alias Topping =
-    String
-
-
-type alias Pizza =
-    { base : Base
-    , toppings : List Topping
-    }
+import Pizza
 
 
 type alias Model =
-    Maybe Pizza
+    Maybe Pizza.Pizza
 
 
 type Msg
-    = SelectBase Base
-    | AddTopping Topping
+    = SelectBase Pizza.Base
+    | AddTopping Pizza.Topping

@@ -1,5 +1,6 @@
 module State exposing (initModel, update)
 
+import Pizza
 import Types exposing (Model, Msg(..))
 
 
@@ -15,9 +16,4 @@ update msg model =
             ( Just { base = base, toppings = [] }, Cmd.none )
 
         AddTopping topping ->
-            ( Maybe.map (addTopping topping) model, Cmd.none )
-
-
-addTopping : Types.Topping -> Types.Pizza -> Types.Pizza
-addTopping topping pizza =
-    { pizza | toppings = List.append pizza.toppings [ topping ] }
+            ( Maybe.map (Pizza.addTopping topping) model, Cmd.none )
