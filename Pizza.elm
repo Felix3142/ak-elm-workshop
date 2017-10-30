@@ -1,4 +1,13 @@
-module Pizza exposing (Base, Topping, Pizza, addTopping, bases, toppings)
+module Pizza
+    exposing
+        ( Base
+        , Topping
+        , Pizza
+        , addTopping
+        , bases
+        , toppings
+        , countTopping
+        )
 
 
 type alias Base =
@@ -18,6 +27,11 @@ type alias Pizza =
 addTopping : Topping -> Pizza -> Pizza
 addTopping topping pizza =
     { pizza | toppings = List.append pizza.toppings [ topping ] }
+
+
+countTopping : Topping -> Pizza -> Int
+countTopping topping pizza =
+    List.length (List.filter ((==) topping) pizza.toppings)
 
 
 bases : List Base

@@ -1,6 +1,7 @@
 module View exposing (view)
 
 import Html exposing (div, text, button)
+import Html.Attributes
 import Html.Events exposing (onClick)
 import Pizza
 import Types exposing (Model, Msg(..))
@@ -31,12 +32,14 @@ pizzaBuilder pizza =
     Html.div []
         [ Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
         , Html.div [] [ Html.text ("Toppings are: " ++ (String.join ", " pizza.toppings)) ]
-        , Html.div [] (List.map addToppingButton Pizza.toppings)
+        , Html.div [] (List.map (addToppingButton pizza) Pizza.toppings)
         ]
 
 
-addToppingButton : Pizza.Topping -> Html.Html Msg
-addToppingButton topping =
+addToppingButton : Pizza.Pizza -> Pizza.Topping -> Html.Html Msg
+addToppingButton pizza topping =
     Html.button
-        [ Html.Events.onClick (Types.AddTopping topping) ]
+        [ Html.Events.onClick (Types.AddTopping topping)
+        , Html.Attributes.disabled (Pizza.countTopping topping pizza == 2)
+        ]
         [ Html.text ("Add " ++ topping) ]
