@@ -46,25 +46,28 @@ addTopping topping pizza =
 
 
 incrementToppingCount : Maybe Int -> Maybe Int
-incrementToppingCount maybeTopping =
-    applyWithDefault 1 ((+) 1) maybeTopping
+incrementToppingCount =
+    applyWithDefault 1 ((+) 1)
 
 
 hasTopping : Topping -> Pizza -> Bool
-hasTopping topping pizza =
-    Dict.get topping pizza.toppings
-        |> Maybe.map ((<) 0)
-        |> Maybe.withDefault False
+hasTopping topping =
+    .toppings
+        >> Dict.get topping
+        >> Maybe.map ((<) 0)
+        >> Maybe.withDefault False
 
 
 countTopping : Topping -> Pizza -> Int
-countTopping topping pizza =
-    Maybe.withDefault 0 (Dict.get topping pizza.toppings)
+countTopping topping =
+    .toppings
+        >> Dict.get topping
+        >> Maybe.withDefault 0
 
 
 countAllToppings : Pizza -> Int
-countAllToppings pizza =
-    List.sum (Dict.values pizza.toppings)
+countAllToppings =
+    .toppings >> Dict.values >> List.sum
 
 
 removeTopping : Topping -> Pizza -> Pizza
@@ -73,13 +76,13 @@ removeTopping topping pizza =
 
 
 decrementToppingCount : Maybe Int -> Maybe Int
-decrementToppingCount maybeTopping =
-    applyWithDefault 0 (\x -> x - 1) maybeTopping
+decrementToppingCount =
+    applyWithDefault 0 (\x -> x - 1)
 
 
 applyWithDefault : b -> (a -> b) -> Maybe a -> Maybe b
-applyWithDefault default fn maybe =
-    Maybe.map fn maybe |> Maybe.withDefault default |> Just
+applyWithDefault default fn =
+    Maybe.map fn >> Maybe.withDefault default >> Just
 
 
 bases : List Base
