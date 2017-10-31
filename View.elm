@@ -1,14 +1,14 @@
 module View exposing (view)
 
-import Dict
-import Html
-import Html.Attributes
-import Html.Events
+import Dict exposing (Dict)
+import Html exposing (Html)
+import Html.Attributes as Attributes
+import Html.Events as Events
 import Pizza
 import Types exposing (Model, Msg(..))
 
 
-view : Model -> Html.Html Msg
+view : Model -> Html Msg
 view model =
     case model of
         Nothing ->
@@ -18,17 +18,17 @@ view model =
             pizzaBuilder pizza
 
 
-baseSelector : Html.Html Msg
+baseSelector : Html Msg
 baseSelector =
     Html.div [] (List.map baseButton Pizza.bases)
 
 
-baseButton : Pizza.Base -> Html.Html Msg
+baseButton : Pizza.Base -> Html Msg
 baseButton base =
-    Html.button [ Html.Events.onClick (Types.SelectBase base) ] [ Html.text base ]
+    Html.button [ Events.onClick (Types.SelectBase base) ] [ Html.text base ]
 
 
-pizzaBuilder : Pizza.Pizza -> Html.Html Msg
+pizzaBuilder : Pizza.Pizza -> Html Msg
 pizzaBuilder pizza =
     Html.div []
         [ Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
@@ -36,7 +36,7 @@ pizzaBuilder pizza =
         ]
 
 
-displayToppings : Pizza.Pizza -> Html.Html Msg
+displayToppings : Pizza.Pizza -> Html Msg
 displayToppings pizza =
     Html.div []
         (List.map
@@ -45,7 +45,7 @@ displayToppings pizza =
         )
 
 
-displayTopping : Pizza.Pizza -> Pizza.Topping -> Html.Html Msg
+displayTopping : Pizza.Pizza -> Pizza.Topping -> Html Msg
 displayTopping pizza topping =
     Html.span []
         [ Html.text (topping ++ "(")
@@ -56,20 +56,20 @@ displayTopping pizza topping =
         ]
 
 
-addToppingButton : Pizza.Pizza -> Pizza.Topping -> Html.Html Msg
+addToppingButton : Pizza.Pizza -> Pizza.Topping -> Html Msg
 addToppingButton pizza topping =
     Html.button
-        [ Html.Events.onClick (Types.AddTopping topping)
-        , Html.Attributes.disabled (toppingIsAvailable pizza topping)
+        [ Events.onClick (Types.AddTopping topping)
+        , Attributes.disabled (toppingIsAvailable pizza topping)
         ]
         [ Html.text ("+") ]
 
 
-removeToppingButton : Pizza.Pizza -> Pizza.Topping -> Html.Html Msg
+removeToppingButton : Pizza.Pizza -> Pizza.Topping -> Html Msg
 removeToppingButton pizza topping =
     Html.button
-        [ Html.Events.onClick (Types.RemoveTopping topping)
-        , Html.Attributes.disabled (not (Pizza.hasTopping topping pizza))
+        [ Events.onClick (Types.RemoveTopping topping)
+        , Attributes.disabled (not (Pizza.hasTopping topping pizza))
         ]
         [ Html.text "-" ]
 

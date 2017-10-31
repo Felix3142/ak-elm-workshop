@@ -1,6 +1,5 @@
 module State exposing (initModel, update)
 
-import Dict
 import Pizza
 import Types exposing (Model, Msg(..))
 

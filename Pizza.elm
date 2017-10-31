@@ -13,7 +13,7 @@ module Pizza
         , removeTopping
         )
 
-import Dict
+import Dict exposing (Dict)
 
 
 type alias Base =
@@ -26,7 +26,7 @@ type alias Topping =
 
 type alias Pizza =
     { base : Base
-    , toppings : Dict.Dict Topping Int
+    , toppings : Dict Topping Int
     }
 
 
@@ -35,7 +35,7 @@ new base =
     { base = base, toppings = newToppings }
 
 
-newToppings : Dict.Dict Topping Int
+newToppings : Dict Topping Int
 newToppings =
     List.foldr (\topping result -> Dict.insert topping 0 result) Dict.empty toppings
 
