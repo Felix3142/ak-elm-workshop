@@ -50,7 +50,7 @@ displayTopping pizza topping =
     Html.span []
         [ Html.text (topping ++ "(")
         , removeToppingButton pizza topping
-        , Html.text (toString (Maybe.withDefault 0 (Dict.get topping pizza.toppings)))
+        , Html.text (Dict.get topping pizza.toppings |> Maybe.withDefault 0 |> toString)
         , addToppingButton pizza topping
         , Html.text ")"
         ]

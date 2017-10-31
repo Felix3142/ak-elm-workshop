@@ -57,7 +57,9 @@ incrementToppingCount maybeTopping =
 
 hasTopping : Topping -> Pizza -> Bool
 hasTopping topping pizza =
-    Maybe.withDefault False (Maybe.map ((<) 0) (Dict.get topping pizza.toppings))
+    Dict.get topping pizza.toppings
+        |> Maybe.map ((<) 0)
+        |> Maybe.withDefault False
 
 
 countTopping : Topping -> Pizza -> Int
