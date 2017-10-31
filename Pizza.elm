@@ -72,10 +72,11 @@ countAllToppings =
 
 
 getToppings : Pizza -> List ( Topping, Int )
-getToppings pizza =
-    Dict.filter (\_ count -> count > 0) pizza.toppings
-        |> Dict.map (,)
-        |> Dict.values
+getToppings =
+    .toppings
+        >> Dict.filter (\_ count -> count > 0)
+        >> Dict.map (,)
+        >> Dict.values
 
 
 removeTopping : Topping -> Pizza -> Pizza
