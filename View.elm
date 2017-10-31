@@ -1,5 +1,6 @@
 module View exposing (view)
 
+import Dict
 import Html
 import Html.Attributes
 import Html.Events
@@ -31,9 +32,19 @@ pizzaBuilder : Pizza.Pizza -> Html.Html Msg
 pizzaBuilder pizza =
     Html.div []
         [ Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
-        , Html.div [] [ Html.text ("Toppings are: " ++ (String.join ", " pizza.toppings)) ]
+        , Html.div [] [ Html.text ("Toppings are: " ++ (displayToppings pizza.toppings)) ]
         , Html.div [] (List.map (addToppingButton pizza) Pizza.toppings)
         ]
+
+
+displayToppings : Dict.Dict Pizza.Topping Int -> String
+displayToppings toppings =
+    String.join ", " (Dict.values (Dict.map displayTopping toppings))
+
+
+displayTopping : Pizza.Topping -> Int -> String
+displayTopping topping count =
+    topping ++ "(" ++ (toString count) ++ ")"
 
 
 addToppingButton : Pizza.Pizza -> Pizza.Topping -> Html.Html Msg
