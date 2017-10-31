@@ -32,8 +32,6 @@ pizzaBuilder : Pizza.Pizza -> Html.Html Msg
 pizzaBuilder pizza =
     Html.div []
         [ Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
-        , Html.div []
-            [ Html.ul [] (List.map (addToppingButton pizza) Pizza.toppings) ]
         , Html.div [] [ Html.text "Toppings are: ", displayToppings pizza ]
         ]
 
@@ -51,8 +49,9 @@ displayTopping : Pizza.Pizza -> Pizza.Topping -> Html.Html Msg
 displayTopping pizza topping =
     Html.span []
         [ Html.text (topping ++ "(")
-        , Html.text (toString (Maybe.withDefault 0 (Dict.get topping pizza.toppings)))
         , removeToppingButton pizza topping
+        , Html.text (toString (Maybe.withDefault 0 (Dict.get topping pizza.toppings)))
+        , addToppingButton pizza topping
         , Html.text ")"
         ]
 
@@ -63,7 +62,7 @@ addToppingButton pizza topping =
         [ Html.Events.onClick (Types.AddTopping topping)
         , Html.Attributes.disabled (toppingIsAvailable pizza topping)
         ]
-        [ Html.text ("Add " ++ topping) ]
+        [ Html.text ("+") ]
 
 
 removeToppingButton : Pizza.Pizza -> Pizza.Topping -> Html.Html Msg
