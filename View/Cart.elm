@@ -16,11 +16,14 @@ displayPizza pizza =
         [ Html.text pizza.base
         , Html.text " ["
         , Html.text
-            (String.join ", "
-                (List.map
-                    (\( topping, count ) -> (toString count) ++ " x " ++ topping)
-                    (Pizza.getToppings pizza)
-                )
+            (String.join
+                ", "
+                (List.map (uncurry displayTopping) (Pizza.getToppings pizza))
             )
         , Html.text "]"
         ]
+
+
+displayTopping : Pizza.Topping -> Int -> String
+displayTopping topping count =
+    (toString count) ++ " x " ++ topping
