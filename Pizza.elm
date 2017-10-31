@@ -6,6 +6,7 @@ module Pizza
         , addTopping
         , bases
         , toppings
+        , new
         , hasTopping
         , countAllToppings
         , countTopping
@@ -27,6 +28,16 @@ type alias Pizza =
     { base : Base
     , toppings : Dict.Dict Topping Int
     }
+
+
+new : Base -> Pizza
+new base =
+    { base = base, toppings = newToppings }
+
+
+newToppings : Dict.Dict Topping Int
+newToppings =
+    List.foldr (\topping result -> Dict.insert topping 0 result) Dict.empty toppings
 
 
 addTopping : Topping -> Pizza -> Pizza

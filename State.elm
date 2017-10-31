@@ -14,7 +14,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         SelectBase base ->
-            ( Just { base = base, toppings = Dict.empty }, Cmd.none )
+            ( Just (Pizza.new base), Cmd.none )
 
         AddTopping topping ->
             ( Maybe.map (Pizza.addTopping topping) model, Cmd.none )
