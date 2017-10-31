@@ -10,6 +10,7 @@ module Pizza
         , hasTopping
         , countAllToppings
         , countTopping
+        , getToppings
         , removeTopping
         )
 
@@ -68,6 +69,13 @@ countTopping topping =
 countAllToppings : Pizza -> Int
 countAllToppings =
     .toppings >> Dict.values >> List.sum
+
+
+getToppings : Pizza -> List ( Topping, Int )
+getToppings pizza =
+    Dict.filter (\_ count -> count > 0) pizza.toppings
+        |> Dict.map (,)
+        |> Dict.values
 
 
 removeTopping : Topping -> Pizza -> Pizza

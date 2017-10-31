@@ -4,18 +4,49 @@ import Dict exposing (Dict)
 import Html exposing (Html)
 import Html.Attributes as Attributes
 import Html.Events as Events
-import Pizza
+import Pizza exposing (Pizza)
 import Types exposing (Model, Msg(..))
 
 
 view : Model -> Html Msg
 view model =
-    case model of
+    Html.div []
+        [ Html.h2 [] [ Html.text "Design Your Pizza" ]
+        , viewPizzaBuilder model.newPizza
+        , Html.h2 [] [ Html.text "Your Cart" ]
+        , viewCart model.cart
+        ]
+
+
+viewPizzaBuilder : Maybe Pizza -> Html Msg
+viewPizzaBuilder pizza =
+    case pizza of
         Nothing ->
             baseSelector
 
         Just pizza ->
             pizzaBuilder pizza
+
+
+viewCart : List Pizza -> Html Msg
+viewCart pizzas =
+    Html.ul [] (List.map displayPizza pizzas)
+
+
+displayPizza : Pizza -> Html Msg
+displayPizza pizza =
+    Html.li []
+        [ Html.text pizza.base
+        , Html.text " ["
+        , Html.text
+            (String.join ", "
+                (List.map
+                    (\( topping, count ) -> (toString count) ++ " x " ++ topping)
+                    (Pizza.getToppings pizza)
+                )
+            )
+        , Html.text "]"
+        ]
 
 
 baseSelector : Html Msg
@@ -33,12 +64,13 @@ pizzaBuilder pizza =
     Html.div []
         [ Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
         , Html.div [] [ Html.text "Toppings are: ", displayToppings pizza ]
+        , Html.button [ Events.onClick (AddToCart pizza) ] [ Html.text "Add to cart" ]
         ]
 
 
 displayToppings : Pizza.Pizza -> Html Msg
 displayToppings pizza =
-    Html.div []
+    Html.ul []
         (List.map
             (\topping -> Html.li [] [ topping ])
             (List.map (displayTopping pizza) (Dict.keys pizza.toppings))

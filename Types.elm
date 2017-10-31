@@ -1,13 +1,16 @@
 module Types exposing (..)
 
-import Pizza
+import Pizza exposing (Pizza)
 
 
 type alias Model =
-    Maybe Pizza.Pizza
+    { newPizza : Maybe Pizza
+    , cart : List Pizza
+    }
 
 
 type Msg
     = SelectBase Pizza.Base
     | AddTopping Pizza.Topping
     | RemoveTopping Pizza.Topping
+    | AddToCart Pizza
