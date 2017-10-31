@@ -39,11 +39,12 @@ pizzaBuilder pizza =
 
 displayToppings : Pizza.Pizza -> Html Msg
 displayToppings pizza =
-    Html.ul []
-        (List.map
-            (\topping -> Html.li [] [ topping ])
-            (List.map (displayTopping pizza) (Dict.keys pizza.toppings))
-        )
+    htmlList (List.map (displayTopping pizza) (Dict.keys pizza.toppings))
+
+
+htmlList : List (Html a) -> Html a
+htmlList items =
+    Html.ul [] (List.map (\item -> Html.li [] [ item ]) items)
 
 
 displayTopping : Pizza.Pizza -> Pizza.Topping -> Html Msg
