@@ -32,19 +32,24 @@ pizzaBuilder : Pizza.Pizza -> Html.Html Msg
 pizzaBuilder pizza =
     Html.div []
         [ Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
-        , Html.div [] [ Html.text ("Toppings are: " ++ (displayToppings pizza.toppings)) ]
-        , Html.div [] (List.map (addToppingButton pizza) Pizza.toppings)
+        , Html.div []
+            [ Html.ul [] (List.map (addToppingButton pizza) Pizza.toppings) ]
+        , Html.div [] [ Html.text "Toppings are: ", displayToppings pizza.toppings ]
         ]
 
 
-displayToppings : Dict.Dict Pizza.Topping Int -> String
+displayToppings : Dict.Dict Pizza.Topping Int -> Html.Html Msg
 displayToppings toppings =
-    String.join ", " (Dict.values (Dict.map displayTopping toppings))
+    Html.div []
+        (List.map
+            (\topping -> Html.li [] [ topping ])
+            (Dict.values (Dict.map displayTopping toppings))
+        )
 
 
-displayTopping : Pizza.Topping -> Int -> String
+displayTopping : Pizza.Topping -> Int -> Html.Html Msg
 displayTopping topping count =
-    topping ++ "(" ++ (toString count) ++ ")"
+    Html.text (topping ++ "(" ++ (toString count) ++ ")")
 
 
 addToppingButton : Pizza.Pizza -> Pizza.Topping -> Html.Html Msg
