@@ -79,12 +79,7 @@ decrementToppingCount maybeTopping =
 
 applyWithDefault : b -> (a -> b) -> Maybe a -> Maybe b
 applyWithDefault default fn maybe =
-    case maybe of
-        Nothing ->
-            Just default
-
-        Just value ->
-            Just (fn value)
+    Maybe.map fn maybe |> Maybe.withDefault default |> Just
 
 
 bases : List Base
