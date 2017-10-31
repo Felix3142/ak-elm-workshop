@@ -47,12 +47,7 @@ addTopping topping pizza =
 
 incrementToppingCount : Maybe Int -> Maybe Int
 incrementToppingCount maybeTopping =
-    case maybeTopping of
-        Nothing ->
-            Just 1
-
-        Just count ->
-            Just (count + 1)
+    applyWithDefault 1 ((+) 1) maybeTopping
 
 
 hasTopping : Topping -> Pizza -> Bool
@@ -79,12 +74,17 @@ removeTopping topping pizza =
 
 decrementToppingCount : Maybe Int -> Maybe Int
 decrementToppingCount maybeTopping =
-    case maybeTopping of
-        Nothing ->
-            Just 0
+    applyWithDefault 0 (\x -> x - 1) maybeTopping
 
-        Just count ->
-            Just (count - 1)
+
+applyWithDefault : b -> (a -> b) -> Maybe a -> Maybe b
+applyWithDefault default fn maybe =
+    case maybe of
+        Nothing ->
+            Just default
+
+        Just value ->
+            Just (fn value)
 
 
 bases : List Base
