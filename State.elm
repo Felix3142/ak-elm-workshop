@@ -18,3 +18,6 @@ update msg model =
 
         AddTopping topping ->
             ( Maybe.map (Pizza.addTopping topping) model, Cmd.none )
+
+        RemoveTopping topping ->
+            ( Maybe.map (Pizza.removeTopping topping) model, Cmd.none )
