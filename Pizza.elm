@@ -96,9 +96,9 @@ applyWithDefault default fn =
 
 bases : List Base
 bases =
-    [ "Margherita", "Bianco" ]
+    [ "Margherita", "Bianco", "Garlic" ]
 
 
 toppings : List Topping
 toppings =
-    [ "Pineapple", "Spam", "Honey", "Walnuts", "Cherries", "Feta" ]
+    [ "Pineapple", "Spam", "Honey", "Walnuts", "Cherries", "Feta", "Nduja" ]
