@@ -27,7 +27,15 @@ update msg model =
         AddToCart pizza ->
             ( { model | newPizza = Nothing, cart = pizza :: model.cart }, Cmd.none )
 
+        RemoveFromCart index ->
+            ( { model | cart = removeFromList index model.cart }, Cmd.none )
+
 
 updateNewPizza : (Pizza -> Pizza) -> Model -> Model
 updateNewPizza update model =
     { model | newPizza = Maybe.map update model.newPizza }
+
+
+removeFromList : Int -> List a -> List a
+removeFromList i xs =
+    (List.take i xs) ++ (List.drop (i + 1) xs)

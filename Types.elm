@@ -15,3 +15,4 @@ type Msg
     | RemoveTopping Pizza.Topping
     | ResetToppings
     | AddToCart Pizza
+    | RemoveFromCart Int
