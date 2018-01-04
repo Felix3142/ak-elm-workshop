@@ -30,6 +30,9 @@ update msg model =
         RemoveFromCart index ->
             ( { model | cart = removeFromList index model.cart }, Cmd.none )
 
+        ResetCart ->
+            ( { model | newPizza = Nothing, cart = [] }, Cmd.none )
+
 
 updateNewPizza : (Pizza -> Pizza) -> Model -> Model
 updateNewPizza update model =

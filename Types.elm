@@ -16,3 +16,4 @@ type Msg
     | ResetToppings
     | AddToCart Pizza
     | RemoveFromCart Int
+    | ResetCart
