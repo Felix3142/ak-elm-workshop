@@ -4,6 +4,7 @@ module Pizza
         , Topping
         , Pizza
         , addTopping
+        , resetToppings
         , bases
         , toppings
         , new
@@ -12,6 +13,7 @@ module Pizza
         , countTopping
         , getToppings
         , removeTopping
+        , setBase
         )
 
 import Dict exposing (Dict)
@@ -39,6 +41,11 @@ new base =
 newToppings : Dict Topping Int
 newToppings =
     List.foldr (\topping result -> Dict.insert topping 0 result) Dict.empty toppings
+
+
+resetToppings : Pizza -> Pizza
+resetToppings pizza =
+    { pizza | toppings = newToppings }
 
 
 addTopping : Topping -> Pizza -> Pizza
@@ -92,6 +99,11 @@ decrementToppingCount =
 applyWithDefault : b -> (a -> b) -> Maybe a -> Maybe b
 applyWithDefault default fn =
     Maybe.map fn >> Maybe.withDefault default >> Just
+
+
+setBase : Base -> Pizza -> Pizza
+setBase base pizza =
+    { pizza | base = base }
 
 
 bases : List Base
