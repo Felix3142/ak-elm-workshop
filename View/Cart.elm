@@ -23,6 +23,7 @@ displayPizza index pizza =
             )
         , Html.text "]"
         , Html.button [ Events.onClick (Types.RemoveFromCart index) ] [ Html.text "Remove" ]
+        , Html.button [ Events.onClick (Types.AddToCart pizza) ] [ Html.text "Duplicate" ]
         ]
 
 
