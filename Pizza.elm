@@ -13,6 +13,7 @@ module Pizza
         , countTopping
         , getToppings
         , removeTopping
+        , setBase
         )
 
 import Dict exposing (Dict)
@@ -98,6 +99,11 @@ decrementToppingCount =
 applyWithDefault : b -> (a -> b) -> Maybe a -> Maybe b
 applyWithDefault default fn =
     Maybe.map fn >> Maybe.withDefault default >> Just
+
+
+setBase : Base -> Pizza -> Pizza
+setBase base pizza =
+    { pizza | base = base }
 
 
 bases : List Base

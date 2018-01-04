@@ -18,4 +18,4 @@ type Msg
     | RemoveFromCart Int
     | ResetCart
     | DuplicateAndModify Pizza
-    | ChangeBase
+    | ChangeBase Pizza.Base

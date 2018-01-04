@@ -15,8 +15,8 @@ update msg model =
         SelectBase base ->
             ( { model | newPizza = Just (Pizza.new base) }, Cmd.none )
 
-        ChangeBase ->
-            ( { model | newPizza = Nothing }, Cmd.none )
+        ChangeBase base ->
+            ( updateNewPizza (Pizza.setBase base) model, Cmd.none )
 
         DuplicateAndModify pizza ->
             ( { model | newPizza = Just pizza }, Cmd.none )
