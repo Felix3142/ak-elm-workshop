@@ -5,54 +5,52 @@ import Html exposing (Html)
 import Html.Attributes as Attributes
 import Html.Events as Events
 import Pizza exposing (Pizza)
-import Types exposing (Msg(..))
-import Builder.Types
-import Cart.Types
+import Builder.Types exposing (Msg(..))
 
 
 view : Maybe Pizza -> Html Msg
 view pizza =
     case pizza of
         Nothing ->
-            Html.map BuilderMsg baseSelector
+            baseSelector
 
         Just pizza ->
             pizzaBuilder pizza
 
 
-baseSelector : Html Builder.Types.Msg
+baseSelector : Html Msg
 baseSelector =
     Html.div [] (List.map baseButton Pizza.bases)
 
 
-baseButton : Pizza.Base -> Html Builder.Types.Msg
+baseButton : Pizza.Base -> Html Msg
 baseButton base =
-    Html.button [ Events.onClick (Builder.Types.SelectBase base) ] [ Html.text base ]
+    Html.button [ Events.onClick (SelectBase base) ] [ Html.text base ]
 
 
-changeBaseSelector : Html Builder.Types.Msg
+changeBaseSelector : Html Msg
 changeBaseSelector =
     Html.div [] (List.map changeBaseButton Pizza.bases)
 
 
-changeBaseButton : Pizza.Base -> Html Builder.Types.Msg
+changeBaseButton : Pizza.Base -> Html Msg
 changeBaseButton base =
-    Html.button [ Events.onClick (Builder.Types.ChangeBase base) ] [ Html.text base ]
+    Html.button [ Events.onClick (ChangeBase base) ] [ Html.text base ]
 
 
 pizzaBuilder : Pizza.Pizza -> Html Msg
 pizzaBuilder pizza =
     Html.div []
-        [ Html.map BuilderMsg changeBaseSelector
+        [ changeBaseSelector
         , Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
-        , Html.div [] [ Html.text "Toppings are: ", Html.map BuilderMsg (displayToppings pizza) ]
-        , Html.button [ Events.onClick (BuilderMsg Builder.Types.Cancel) ] [ Html.text "Cancel" ]
-        , Html.button [ Events.onClick (BuilderMsg Builder.Types.ResetToppings) ] [ Html.text "Reset" ]
-        , Html.button [ Events.onClick (CartMsg (Cart.Types.AddToCart pizza)) ] [ Html.text "Add to cart" ]
+        , Html.div [] [ Html.text "Toppings are: ", (displayToppings pizza) ]
+        , Html.button [ Events.onClick Cancel ] [ Html.text "Cancel" ]
+        , Html.button [ Events.onClick ResetToppings ] [ Html.text "Reset" ]
+        , Html.button [ Events.onClick (AddToCart pizza) ] [ Html.text "Add to cart" ]
         ]
 
 
-displayToppings : Pizza.Pizza -> Html Builder.Types.Msg
+displayToppings : Pizza.Pizza -> Html Msg
 displayToppings pizza =
     htmlList (List.map (displayTopping pizza) (Dict.keys pizza.toppings))
 
@@ -62,7 +60,7 @@ htmlList items =
     Html.ul [] (List.map (\item -> Html.li [] [ item ]) items)
 
 
-displayTopping : Pizza.Pizza -> Pizza.Topping -> Html Builder.Types.Msg
+displayTopping : Pizza.Pizza -> Pizza.Topping -> Html Msg
 displayTopping pizza topping =
     Html.span []
         [ Html.text (topping ++ "(")
@@ -73,19 +71,19 @@ displayTopping pizza topping =
         ]
 
 
-addToppingButton : Pizza.Pizza -> Pizza.Topping -> Html Builder.Types.Msg
+addToppingButton : Pizza.Pizza -> Pizza.Topping -> Html Msg
 addToppingButton pizza topping =
     Html.button
-        [ Events.onClick (Builder.Types.AddTopping topping)
+        [ Events.onClick (AddTopping topping)
         , Attributes.disabled (toppingIsAvailable pizza topping)
         ]
         [ Html.text ("+") ]
 
 
-removeToppingButton : Pizza.Pizza -> Pizza.Topping -> Html Builder.Types.Msg
+removeToppingButton : Pizza.Pizza -> Pizza.Topping -> Html Msg
 removeToppingButton pizza topping =
     Html.button
-        [ Events.onClick (Builder.Types.RemoveTopping topping)
+        [ Events.onClick (RemoveTopping topping)
         , Attributes.disabled (not (Pizza.hasTopping topping pizza))
         ]
         [ Html.text "-" ]

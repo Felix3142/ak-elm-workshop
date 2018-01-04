@@ -18,7 +18,16 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         BuilderMsg builderMsg ->
-            ( { model | newPizza = Builder.State.update builderMsg model.newPizza }, Cmd.none )
+            let
+                ( newNewPizza, maybeCartMsg ) =
+                    Builder.State.update builderMsg model.newPizza
+
+                newModel =
+                    { model | newPizza = newNewPizza }
+            in
+                maybeCartMsg
+                    |> Maybe.map (\cartMsg -> update (CartMsg cartMsg) newModel)
+                    |> Maybe.withDefault ( newModel, Cmd.none )
 
         CartMsg cartMsg ->
             let
