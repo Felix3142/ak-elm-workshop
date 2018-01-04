@@ -30,7 +30,7 @@ baseButton base =
 
 changeBaseSelector : Html Msg
 changeBaseSelector =
-    Html.div [] (List.map (changeBaseButton) Pizza.bases)
+    Html.div [] (List.map changeBaseButton Pizza.bases)
 
 
 changeBaseButton : Pizza.Base -> Html Msg
@@ -44,8 +44,8 @@ pizzaBuilder pizza =
         [ changeBaseSelector
         , Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
         , Html.div [] [ Html.text "Toppings are: ", displayToppings pizza ]
-        , Html.button [ Events.onClick (Cancel) ] [ Html.text "Cancel" ]
-        , Html.button [ Events.onClick (ResetToppings) ] [ Html.text "Reset" ]
+        , Html.button [ Events.onClick Cancel ] [ Html.text "Cancel" ]
+        , Html.button [ Events.onClick ResetToppings ] [ Html.text "Reset" ]
         , Html.button [ Events.onClick (AddToCart pizza) ] [ Html.text "Add to cart" ]
         ]
 
