@@ -15,6 +15,9 @@ update msg model =
         SelectBase base ->
             ( { model | newPizza = Just (Pizza.new base) }, Cmd.none )
 
+        Cancel ->
+            ( { model | newPizza = Nothing }, Cmd.none )
+
         ChangeBase base ->
             ( updateNewPizza (Pizza.setBase base) model, Cmd.none )
 

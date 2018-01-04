@@ -19,3 +19,4 @@ type Msg
     | ResetCart
     | DuplicateAndModify Pizza
     | ChangeBase Pizza.Base
+    | Cancel
