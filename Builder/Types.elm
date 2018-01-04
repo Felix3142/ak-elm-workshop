@@ -10,3 +10,4 @@ type Msg
     | ResetToppings
     | ChangeBase Pizza.Base
     | Cancel
+    | SetPizza Pizza

@@ -29,3 +29,6 @@ update msg model =
 
         ResetToppings ->
             Maybe.map Pizza.resetToppings model
+
+        SetPizza pizza ->
+            Just pizza
