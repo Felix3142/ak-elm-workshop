@@ -18,3 +18,4 @@ type Msg
     | RemoveFromCart Int
     | ResetCart
     | DuplicateAndModify Pizza
+    | ChangeBase

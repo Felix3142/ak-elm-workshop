@@ -33,6 +33,7 @@ pizzaBuilder pizza =
     Html.div []
         [ Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
         , Html.div [] [ Html.text "Toppings are: ", displayToppings pizza ]
+        , Html.button [ Events.onClick (ChangeBase) ] [ Html.text "Change base" ]
         , Html.button [ Events.onClick (ResetToppings) ] [ Html.text "Reset" ]
         , Html.button [ Events.onClick (AddToCart pizza) ] [ Html.text "Add to cart" ]
         ]
