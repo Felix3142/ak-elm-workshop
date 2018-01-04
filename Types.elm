@@ -13,5 +13,5 @@ type Msg
     = SelectBase Pizza.Base
     | AddTopping Pizza.Topping
     | RemoveTopping Pizza.Topping
-    | ResetToppings Pizza
+    | ResetToppings
     | AddToCart Pizza

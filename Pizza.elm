@@ -4,6 +4,7 @@ module Pizza
         , Topping
         , Pizza
         , addTopping
+        , resetToppings
         , bases
         , toppings
         , new
@@ -39,6 +40,11 @@ new base =
 newToppings : Dict Topping Int
 newToppings =
     List.foldr (\topping result -> Dict.insert topping 0 result) Dict.empty toppings
+
+
+resetToppings : Pizza -> Pizza
+resetToppings pizza =
+    { pizza | toppings = newToppings }
 
 
 addTopping : Topping -> Pizza -> Pizza

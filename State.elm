@@ -21,8 +21,8 @@ update msg model =
         RemoveTopping topping ->
             ( updateNewPizza (Pizza.removeTopping topping) model, Cmd.none )
 
-        ResetToppings pizza ->
-            ( { model | newPizza = Just (Pizza.new pizza.base) }, Cmd.none )
+        ResetToppings ->
+            ( updateNewPizza (Pizza.resetToppings) model, Cmd.none )
 
         AddToCart pizza ->
             ( { model | newPizza = Nothing, cart = pizza :: model.cart }, Cmd.none )
