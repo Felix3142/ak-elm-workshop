@@ -11,3 +11,4 @@ type Msg
     | ChangeBase Pizza.Base
     | Cancel
     | SetPizza Pizza
+    | AddToCart Pizza
