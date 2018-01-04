@@ -17,3 +17,4 @@ type Msg
     | AddToCart Pizza
     | RemoveFromCart Int
     | ResetCart
+    | DuplicateAndModify Pizza
