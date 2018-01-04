@@ -1,4 +1,4 @@
-module View.Cart exposing (view)
+module Cart.View exposing (view)
 
 import Html exposing (Html)
 import Html.Events as Events

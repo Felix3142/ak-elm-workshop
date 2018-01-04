@@ -1,4 +1,4 @@
-module View.Builder exposing (view)
+module Builder.View exposing (view)
 
 import Dict
 import Html exposing (Html)
