@@ -1,6 +1,8 @@
 module Types exposing (..)
 
 import Pizza exposing (Pizza)
+import Builder.Types
+import Cart.Types
 
 
 type alias Model =
@@ -10,13 +12,5 @@ type alias Model =
 
 
 type Msg
-    = SelectBase Pizza.Base
-    | AddTopping Pizza.Topping
-    | RemoveTopping Pizza.Topping
-    | ResetToppings
-    | AddToCart Pizza
-    | RemoveFromCart Int
-    | ResetCart
-    | DuplicateAndModify Pizza
-    | ChangeBase Pizza.Base
-    | Cancel
+    = CartMsg Cart.Types.Msg
+    | BuilderMsg Builder.Types.Msg

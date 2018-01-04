@@ -3,7 +3,8 @@ module Cart.View exposing (view)
 import Html exposing (Html)
 import Html.Events as Events
 import Pizza exposing (Pizza)
-import Types exposing (Msg)
+import Types exposing (Msg(CartMsg))
+import Cart.Types
 
 
 view : List Pizza -> Html Msg
@@ -22,9 +23,9 @@ displayPizza index pizza =
                 (List.map (uncurry displayTopping) (Pizza.getToppings pizza))
             )
         , Html.text "]"
-        , Html.button [ Events.onClick (Types.RemoveFromCart index) ] [ Html.text "Remove" ]
-        , Html.button [ Events.onClick (Types.AddToCart pizza) ] [ Html.text "Duplicate" ]
-        , Html.button [ Events.onClick (Types.DuplicateAndModify pizza) ] [ Html.text "Duplicate and Modify" ]
+        , Html.button [ Events.onClick (CartMsg (Cart.Types.RemoveFromCart index)) ] [ Html.text "Remove" ]
+        , Html.button [ Events.onClick (CartMsg (Cart.Types.AddToCart pizza)) ] [ Html.text "Duplicate" ]
+        , Html.button [ Events.onClick (CartMsg (Cart.Types.DuplicateAndModify pizza)) ] [ Html.text "Duplicate and Modify" ]
         ]
 
 

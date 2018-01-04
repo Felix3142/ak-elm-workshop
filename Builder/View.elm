@@ -6,6 +6,8 @@ import Html.Attributes as Attributes
 import Html.Events as Events
 import Pizza exposing (Pizza)
 import Types exposing (Msg(..))
+import Builder.Types
+import Cart.Types
 
 
 view : Maybe Pizza -> Html Msg
@@ -25,7 +27,7 @@ baseSelector =
 
 baseButton : Pizza.Base -> Html Msg
 baseButton base =
-    Html.button [ Events.onClick (Types.SelectBase base) ] [ Html.text base ]
+    Html.button [ Events.onClick (BuilderMsg (Builder.Types.SelectBase base)) ] [ Html.text base ]
 
 
 changeBaseSelector : Html Msg
@@ -35,7 +37,7 @@ changeBaseSelector =
 
 changeBaseButton : Pizza.Base -> Html Msg
 changeBaseButton base =
-    Html.button [ Events.onClick (Types.ChangeBase base) ] [ Html.text base ]
+    Html.button [ Events.onClick (BuilderMsg (Builder.Types.ChangeBase base)) ] [ Html.text base ]
 
 
 pizzaBuilder : Pizza.Pizza -> Html Msg
@@ -44,9 +46,9 @@ pizzaBuilder pizza =
         [ changeBaseSelector
         , Html.div [] [ Html.text ("Base is " ++ pizza.base) ]
         , Html.div [] [ Html.text "Toppings are: ", displayToppings pizza ]
-        , Html.button [ Events.onClick Cancel ] [ Html.text "Cancel" ]
-        , Html.button [ Events.onClick ResetToppings ] [ Html.text "Reset" ]
-        , Html.button [ Events.onClick (AddToCart pizza) ] [ Html.text "Add to cart" ]
+        , Html.button [ Events.onClick (BuilderMsg Builder.Types.Cancel) ] [ Html.text "Cancel" ]
+        , Html.button [ Events.onClick (BuilderMsg Builder.Types.ResetToppings) ] [ Html.text "Reset" ]
+        , Html.button [ Events.onClick (CartMsg (Cart.Types.AddToCart pizza)) ] [ Html.text "Add to cart" ]
         ]
 
 
@@ -74,7 +76,7 @@ displayTopping pizza topping =
 addToppingButton : Pizza.Pizza -> Pizza.Topping -> Html Msg
 addToppingButton pizza topping =
     Html.button
-        [ Events.onClick (Types.AddTopping topping)
+        [ Events.onClick (BuilderMsg (Builder.Types.AddTopping topping))
         , Attributes.disabled (toppingIsAvailable pizza topping)
         ]
         [ Html.text ("+") ]
@@ -83,7 +85,7 @@ addToppingButton pizza topping =
 removeToppingButton : Pizza.Pizza -> Pizza.Topping -> Html Msg
 removeToppingButton pizza topping =
     Html.button
-        [ Events.onClick (Types.RemoveTopping topping)
+        [ Events.onClick (BuilderMsg (Builder.Types.RemoveTopping topping))
         , Attributes.disabled (not (Pizza.hasTopping topping pizza))
         ]
         [ Html.text "-" ]
