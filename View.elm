@@ -15,5 +15,5 @@ view model =
         , Builder.View.view model.newPizza
         , Html.h2 [] [ Html.text "Your Cart" ]
         , Html.button [ Events.onClick (CartMsg Cart.Types.ResetCart) ] [ Html.text "Reset" ]
-        , Cart.View.view model.cart
+        , Html.map CartMsg (Cart.View.view model.cart)
         ]
