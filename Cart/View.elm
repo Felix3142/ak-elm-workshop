@@ -22,9 +22,9 @@ displayPizza index pizza =
                 (List.map (uncurry displayTopping) (Pizza.getToppings pizza))
             )
         , Html.text "]"
-        , Html.button [ Events.onClick (Cart.Types.RemoveFromCart index) ] [ Html.text "Remove" ]
-        , Html.button [ Events.onClick (Cart.Types.AddToCart pizza) ] [ Html.text "Duplicate" ]
-        , Html.button [ Events.onClick (Cart.Types.DuplicateAndModify pizza) ] [ Html.text "Duplicate and Modify" ]
+        , Html.button [ Events.onClick (RemoveFromCart index) ] [ Html.text "Remove" ]
+        , Html.button [ Events.onClick (AddToCart pizza) ] [ Html.text "Duplicate" ]
+        , Html.button [ Events.onClick (DuplicateAndModify pizza) ] [ Html.text "Duplicate and Modify" ]
         ]
 
 
